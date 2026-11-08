@@ -1,0 +1,26 @@
+{
+ "source_commit": "99509ebae19993ec488fc6530f725474d29ee1dc",
+ "source_dirty": false,
+ "synced_at": "2026-11-08T06:53:10Z",
+ "files": {
+  ".gitattributes": "ad0792354372e886c244268e2157a055e10bd0ffd82cf65d0f19a6ae1402da42",
+  "api_client.py": "1ca70e83952d8fd1ada820401b67b5a1322e89a701e68ddc295499ddd6935c3e",
+  "data_loader.py": "0dd529cdfc229171acf6c2a4b0297d503caa19897d618d99de5f42c2c16cc0ca",
+  "wn8_calculator.py": "06a0bd3dda9e88bc8a7c9240f5496b66e25b8e7fc9045abe2412c23aab4d6589",
+  "newscore_calculator.py": "e9b2744ee10a8f2ecfd4267e6a8178bd406cf09aa17510764c12ed2ed9f81ba8",
+  "ui_components.py": "cc7ff255328ce8cb39a6390eaa5f1cc62acd6787eae4bdd9a85ce89e46849712",
+  "tankavg.json": "cc1d9c3d9e052b0fbc2df6f9fb40a50b2f9da5489c1e83db91162cc05c64b635",
+  "bs-tankopedia.json": "3ccc6ed32f9241c095d1154d17059f89d5fa92a16ff3e8463021840d760da420",
+  "data_provenance.json": "8c53f859abee4f496b1d2609a9916fa1b3faa3e783cfb4c214e725cdaf961da2",
+  "scripts/export_player_html.py": "98f60ae25fd44bb4149657d03e62bd9a331a2d9f290221667cdcbd03b3875e42",
+  "scripts/site_data.py": "1662ec4d037f2520764ef6a9cd0f43ecc512c21f8a9b712157f36970ae42c2b6",
+  "site_assets/wn8.js": "fae0c64bab00c8bc9b937dcf3dffb21727e3a7baaf0814c08466ebb4b2e42282",
+  "site_assets/session.js": "c771e380324d6e2f7a3f644a8f5e6168ae49e709eb4523e9f5252aba3e95f2f9",
+  "site_assets/tracker.css": "279ee76d129111722fd1e5784d21d789a6ebedf8266c08cf568f21e2f229329b",
+  "tests/make_parity_fixture.py": "5b41f568e88d4b87af15d0c60da39240a1df2d51e468979296d022ee50522360",
+  "tests/wn8_parity.mjs": "9d2c0b7e4e8ab14e557762edb36988edfe72677c175c6a4850e2691897dd49a3",
+  "tests/parity_cases.json": "e00de8d190b6cce7a4e64e49496e713fc5bb749d89c52b7c8e7ce3310eb3b648",
+  "tests/test_site_data.py": "fbed39f14a4cb7713f232a13c617b2af0b5b4e02eeff28b4fb6962e2e48455c6",
+  "tests/test_api_client.py": "55bdc13af40e6aa90e8713c19d9bb4b0c003ec87dd716cb6af550c5a25815206"
+ }
+}

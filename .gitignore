@@ -1,0 +1,11 @@
+# Build output. The workflow deploys site/ as an artifact instead of committing it.
+site/
+build/
+__pycache__/
+*.pyc
+.venv*/
+*.tmp
+
+# Application ids never go in the repository; the workflow reads a secret.
+.wg_application_id
+.wg_public_app_id

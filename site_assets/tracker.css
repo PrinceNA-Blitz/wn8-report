@@ -1,0 +1,16 @@
+/* Session panel (site_assets/session.js). Uses the report's colour variables. */
+.sess-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:.6rem; margin-bottom:.6rem; }
+.sess-cards .card .v { font-size:1.35rem; }
+.sess-bar { display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center;
+  margin:0 0 .75rem; font-size:.82rem; color:var(--muted); }
+.sess-bar button { font:inherit; font-size:.8rem; cursor:pointer; padding:.3rem .75rem;
+  border-radius:6px; border:1px solid var(--line); background:var(--card); color:var(--text); }
+.sess-bar button:hover { border-color:#3972C6; }
+.sess-err { color:#ff6b6b; }
+.sess-warn { background:rgba(224,182,74,.1); border:1px solid #6b5320; color:#e0b64a;
+  border-radius:8px; padding:.5rem .75rem; font-size:.82rem; margin-bottom:.75rem; }
+.sess-empty { color:var(--muted); font-size:.9rem; }
+.sess th { cursor:default; position:static; }
+.sess th::after { content:none; }
+.sess .tier { color:var(--muted); font-size:.72rem; margin-left:.4rem; }

@@ -1,0 +1,11 @@
+{
+  "tankavg.json": {
+    "source_url": "https://www.blitzstars.com/api/tankaverages.json",
+    "downloaded_as": "Blitzstars10.3.txt",
+    "downloaded_utc": "2026-10-03T15:21:27+00:00",
+    "ingested_utc": "2026-10-03T15:22:46+00:00",
+    "tank_count": 707,
+    "sha256": "3c851bd8bf093dc937f1cd73b1246a7ee4cdea5b0864e761bb3aecf6c54c8a3f",
+    "note": "Manual browser download \u2014 BlitzStars is Cloudflare-gated, there is no automated fetcher."
+  }
+}

@@ -1,0 +1,4 @@
+# Store every file byte for byte. Several data files are referred to by
+# SHA-256 (data_provenance.json, research/data_manifest.json), so line endings
+# must never be converted.
+* -text

@@ -1,0 +1,6 @@
+# What the site build needs, pinned to the versions the report is checked with
+# locally, so the numbers match.
+pandas==3.0.2
+numpy==2.4.4
+requests==2.33.1
+tzdata==2026.1
