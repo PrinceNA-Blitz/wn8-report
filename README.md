@@ -34,7 +34,4 @@ WN8 is the standard formula with BlitzStars' expected values (`tankavg.json`).
 
 - The code is copied here from a private repository by a sync script;
   `SYNC_MANIFEST.json` records the source commit. Changes are made there.
-- Expected values: [BlitzStars](https://www.blitzstars.com/). Data: the
-  [Wargaming.net Public API](https://developers.wargaming.net/). Not affiliated
-  with Wargaming.
 - No license is granted: all rights reserved.
