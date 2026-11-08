@@ -28,7 +28,7 @@ If the API is down, or any stat is lower than at the last build, nothing is
 committed or deployed and the previous page stays up. A manual run can record
 such a drop as an anomaly instead ("allow decrease").
 
-WN8 is the standard formula with BlitzStars' expected values (`tankavg.json`).
+WN8 is the standard formula, with per-tank expected values from `tankavg.json`.
 
 ## Notes
 

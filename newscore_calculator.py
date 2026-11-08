@@ -239,7 +239,7 @@ def calc_newscore_per_tank(df: pd.DataFrame, norm_ev: dict | None = None) -> pd.
     Tanks below the tier min-battles threshold or without norm EVs get NaN.
 
     norm_ev: optional pre-loaded dict {tank_id: {dpbMean, dpbSd, kpbMean, kpbSd, srMean, srSd}}.
-             Defaults to tankavg.json (BlitzStars) if None.
+             Defaults to tankavg.json if None.
              Pass load_blitzkit_norm_ev() from data_loader to use BlitzKit EVs.
     """
     if norm_ev is None:

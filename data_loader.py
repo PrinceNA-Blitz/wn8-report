@@ -11,10 +11,10 @@ _cache_resource = st.cache_resource if st else (lambda f: f)
 
 DATA_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# BlitzStars uses the raw tankaverages.json per-battle means as expected values,
-# unscaled. The old 0.9003 factor was compensating for an additive (non-standard)
-# WN8 formula; with the standard formula, 1.0 reproduces BlitzStars per-tank WN8
-# to display rounding (research/blitzstars_ev_backsolve.md, 2026-09-27).
+# The stat site that publishes tankaverages.json uses its raw per-battle means as
+# expected values, unscaled. The old 0.9003 factor was compensating for an additive
+# (non-standard) WN8 formula; with the standard formula, 1.0 reproduces that site's
+# per-tank WN8 to display rounding (research notes, 2026-09-27).
 _EV_CORRECTION = 1.0
 
 
@@ -59,7 +59,7 @@ def load_expected_values() -> dict:
     """
     Load tankavg.json and index by tank_id.
     Derives per-battle expected values from all.* fields, then applies
-    a calibration correction so WN8 aligns with blitzstars/stat sites.
+    a calibration correction so WN8 aligns with stat sites.
     Returns {tank_id (int): {expDmg, expFrag, expSpot, expDef, expWinRate}}
     """
     return _load_expected_values()

@@ -909,7 +909,7 @@ def build_html(nickname, region, account_id, info, df, overall_wn8, overall_ns,
   </table></div>{site_history}
 
   <footer>
-    WN8 uses raw tankavg.json expected values and the standard WN8 formula (matches BlitzStars).
+    WN8 uses raw tankavg.json expected values and the standard WN8 formula.
     NewScore v4 weights: damage {W_DPB_V4 * 100:.1f}% / survival {W_SR_V4 * 100:.1f}% / spotting {W_SPB_V4 * 100:.1f}%;
     every battle on a tank with population norms counts.
     Data from the Wargaming WoT Blitz API.
@@ -1043,7 +1043,7 @@ def load_stats_file(path):
     """
     Read per-tank stats from a local JSON dump in WG `tanks/stats/` shape.
 
-    BlitzStars exports are a time series: one row per tank per snapshot, so a
+    Stat-site exports are a time series: one row per tank per snapshot, so a
     tank can appear many times and summing the file raw double-counts badly
     (65,415 battles instead of 42,968 on a real export). Collapse to the most
     recent row per tank_id.
@@ -1080,7 +1080,7 @@ def main():
                     help="Exclude tanks already above this WN8 (default: no cap)")
     ap.add_argument("--stats-file", default=None,
                     help="Read per-tank stats from a local JSON dump (e.g. a "
-                         "BlitzStars export) instead of the live WG API. The "
+                         "stat-site export) instead of the live WG API. The "
                          "account lookup still uses the API for the header.")
     ap.add_argument("--dump-parity", default=None, metavar="PATH",
                     help="Also write the WN8 inputs and Python's results as JSON, "
