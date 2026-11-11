@@ -2,8 +2,8 @@
 NewScore calculator — per-tank z-scores rolled into a 0–1000 account score.
 
 Every version compares a player's per-battle stats on a tank with the
-players of that same tank (means and SDs from tankavg.json) and combines
-the z-scores. v4 is canonical; v0–v3 are kept for comparison and are
+players of that same tank (means and SDs from tankavg.json for v0–v3, from
+newscore_norms.json for v4) and combines the z-scores. v4 is canonical; v0–v3 are kept for comparison and are
 described oldest first.
 
 NewScore v0 ("Old Score") — damage, kills and survival:
@@ -89,6 +89,10 @@ everything around them:
     WN8 (0.86), which uses winrate as an input. A per-tier adjustment and
     weights fit on tiers 8–10 were tried and rejected after review. Constants
     come from scripts/v4_research.py; see research/v4_report.md.
+    Since 2026-11-11 v4's norms are newscore_norms.json (our own scan of about
+    20,000 active accounts, November 2026) instead of tankavg.json, and MU_V4 /
+    S_V4 were re-set (research/own_norms/anchors.json in the newscore repo) so
+    the median and 99th-percentile accounts score what they did before.
 
 Tier-based minimum battles per tank (v0–v3 only; v4 has none):
     Tiers 1–4: 50 | Tiers 5–7: 75 | Tiers 8–9: 100 | Tier 10: 150
@@ -557,14 +561,19 @@ def calc_overall_newscore_v3(df_ns: pd.DataFrame) -> float:
 
 
 # ── NewScore v4 — canonical ───────────────────────────────────────────────────
-# Constants are the output of scripts/v4_research.py (research/v4_constants.json);
-# test_newscore.py fails if the two drift apart. See research/v4_report.md.
+# Weights, N0 and sigma2 are the output of scripts/v4_research.py
+# (research/v4_constants.json); the scale anchors MU_V4 / S_V4 come from
+# research/own_norms/anchors.json. test_newscore.py fails if either drifts apart.
+# See research/v4_report.md and research/own_norms/ in the newscore repo.
 W_DPB_V4 = 0.394
 W_SR_V4  = 0.355
 W_SPB_V4 = 0.251
 
-MU_V4 = -0.0918     # composite of the median account        -> 500
-S_V4  = 0.9632      # set so the 99th-percentile account     -> 900
+# MU_V4 / S_V4 come from research/own_norms/anchors.json in the newscore repo
+# (2026-11-11) and pair with newscore_norms.json: they keep the 500 / 900 anchors
+# where the 2026-10-11 values (-0.0918, 0.9632, with tankavg.json) put them.
+MU_V4 = 0.0090      # composite of the median account        -> 500
+S_V4  = 0.8136      # set so the 99th-percentile account     -> 900
 
 N0_V4     = 13.5    # battles at which a tank's own results and the account average weigh equally
 SIGMA2_V4 = 5.13    # per-battle sampling variance of the composite (approximate)
@@ -595,10 +604,16 @@ def _scale_v4_np(composite: np.ndarray) -> np.ndarray:
 
 _norm_ev_v4: dict | None = None
 
+# v4's norms: our own scan of about 20,000 active accounts (November 2026), in
+# the tankavg.json format. v0–v3 keep reading tankavg.json.
+NEWSCORE_NORMS_FILE = Path(__file__).parent / "newscore_norms.json"
+
 
 def _load_norm_ev_v4(path: str | Path | None = None) -> dict:
     """
-    Load per-tank normalization EVs for v4 (dpb, sr, spb) from tankavg.json.
+    Load per-tank normalization EVs for v4 (dpb, sr, spb) from
+    NEWSCORE_NORMS_FILE (newscore_norms.json). A missing file is an error: there
+    is no fallback to tankavg.json, whose norms do not go with MU_V4 / S_V4.
 
     Nothing is defaulted. A tank is skipped unless it has a meanSd block,
     number_of_players >= MIN_TANK_POPULATION, and a finite mean plus a finite
@@ -612,7 +627,10 @@ def _load_norm_ev_v4(path: str | Path | None = None) -> dict:
     global _norm_ev_v4
     if path is None and _norm_ev_v4 is not None:
         return _norm_ev_v4
-    with open(path or Path(__file__).parent / "tankavg.json", encoding="utf-8") as f:
+    if path is None and not NEWSCORE_NORMS_FILE.is_file():
+        raise FileNotFoundError(f"NewScore v4 norms file not found: {NEWSCORE_NORMS_FILE} "
+                                "(v4 does not fall back to tankavg.json)")
+    with open(path or NEWSCORE_NORMS_FILE, encoding="utf-8") as f:
         raw = json.load(f)
     keys = {
         "dpbMean": "dpbMean", "dpbSd": "dpbSd",
@@ -646,7 +664,7 @@ def calc_newscore_v4_per_tank(df: pd.DataFrame, norm_ev: dict | None = None) -> 
 
     Requires df columns: tank_id, battles, damage_dealt, survived_battles,
     spotted — a missing column raises instead of being read as zero.
-    norm_ev defaults to _load_norm_ev_v4() (tankavg.json).
+    norm_ev defaults to _load_norm_ev_v4() (newscore_norms.json).
 
     A tank is counted when it has norms, battles > 0 and finite stats; there
     is no minimum-battle threshold. Columns added:
